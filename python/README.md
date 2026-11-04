@@ -25,8 +25,12 @@ Es una buena práctica aislar las dependencias:
 # Crear el entorno virtual
 python3 -m venv .venv
 
-# Activar el entorno virtual
+# Activar según tu shell:
+# En Bash / Zsh:
 source .venv/bin/activate
+
+# En Fish shell (si tu terminal usa fish):
+source .venv/bin/activate.fish
 ```
 *(Verás que la terminal ahora muestra el prefijo `(.venv)`).*
 
