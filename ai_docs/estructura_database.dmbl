@@ -1,0 +1,61 @@
+Table tb_concepto_historico {
+  cohi_id bigserial [pk, increment]
+  cohi_tipo varchar
+  cohi_cod varchar
+  cohi_nom varchar
+  cohi_estado varchar
+  usu_info jsonb
+  fecha_created timestamptz [default: `now()`]
+}
+
+Table tb_persona_historica {
+  pers_id bigserial [pk, increment]
+  pers_nombre text
+  pers_apelpat text
+  pers_apelmat text
+  pers_fechnac date
+  pers_ingreso date
+  pers_cargo text
+  pers_condicion varchar
+  pers_afp date [note: 'Columna 6 Hoja 1: Fecha Afiliacion AFP (alias export: Fecha_AFP)']
+  pers_nom_afp varchar [note: 'Columna 9 Hoja 1: Nombre AFP (alias export: pers_nom_afp)']
+  pers_c_essal varchar [note: 'Columna 8 Hoja 1: C.ESSAL. (alias export: C_ESSAL)']
+  pers_dni varchar(8)
+  pers_codigo varchar
+  pers_estado varchar(1)
+  usu_info jsonb
+  fecha_created timestamptz [default: `now()`]
+}
+
+Table tb_concepto_historico_persona {
+  pers_cohi_id bigserial [pk, increment]
+  periodo integer
+  mes integer
+  pers_id integer [ref: > tb_persona_historica.pers_id]
+  cohi_id integer [ref: > tb_concepto_historico.cohi_id]
+  monto "double precision"
+  estado varchar
+  usu_info jsonb
+  fecha_created timestamptz [default: `now()`]
+}
+
+Table tb_evento_historico {
+  evhi_id bigserial [pk, increment]
+  evhi_nom text
+  evhi_tipo integer
+  evhi_estado varchar
+  usu_info jsonb
+  fecha_created timestamptz [default: `now()`]
+}
+
+Table tb_evento_historico_persona {
+  pers_evhi_id bigserial [pk, increment]
+  periodo integer
+  mes integer
+  pers_id integer [ref: > tb_persona_historica.pers_id]
+  evhi_id integer [ref: > tb_evento_historico.evhi_id]
+  monto varchar
+  estado varchar
+  usu_info jsonb
+  fecha_created timestamptz [default: `now()`]
+}
